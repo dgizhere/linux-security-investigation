@@ -1,1 +1,75 @@
+# APPARMOR INVESTIGATION
 
+Profile investigated:
+
+/etc/apparmor.d/usr.sbin.cupsd
+
+AppArmor status:
+
+The cupsd profile was confirmed to be in enforce mode.
+
+1. FILE ACCESS DENIAL
+
+The system logs showed an AppArmor DENIED event involving:
+
+Process:
+cupsd
+
+Operation:
+open
+
+File:
+/etc/paperspecs
+
+Requested access:
+read
+
+Denied access:
+read
+
+Interpretation:
+
+The cupsd process attempted to read /etc/paperspecs and
+AppArmor blocked the operation.
+
+2. CAPABILITY DENIAL
+
+The logs also showed:
+
+Operation:
+capable
+
+Capability:
+CAP_NET_ADMIN
+
+Interpretation:
+
+The cupsd process attempted to use the CAP_NET_ADMIN Linux
+capability and AppArmor denied the request.
+
+3. POLICY CHECK
+
+The AppArmor profile contained:
+
+/etc/paperspecs r,
+
+This rule appeared to permit read access to /etc/paperspecs.
+
+However, the system log showed that a read attempt was denied.
+
+Assessment:
+
+This represented a policy/runtime discrepancy that required
+further investigation.
+
+The exact cause of the discrepancy was not conclusively
+established during this investigation.
+
+FINAL SECURITY ASSESSMENT
+
+AppArmor was actively enforcing restrictions on cupsd.
+
+No evidence of compromise was found during the checks performed.
+
+This conclusion does not claim absolute certainty that the
+system was uncompromised.
