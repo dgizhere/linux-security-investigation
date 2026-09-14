@@ -1,1 +1,32 @@
+# NETWORK SERVICE INVESTIGATION
 
+Command:
+sudo ss -ltnp
+
+Purpose:
+Identify listening TCP sockets, numeric addresses and ports,
+and the processes associated with them.
+
+Relevant finding:
+
+127.0.0.1:631
+Process: cupsd
+PID: 1569
+
+Interpretation:
+
+Port 631 was associated with the CUPS printing service.
+
+The service was bound to the loopback address 127.0.0.1,
+meaning the listener was bound to the local machine rather
+than directly exposed through all network interfaces.
+
+Security observation:
+
+A service bound only to the loopback interface has a smaller
+network exposure than a service listening on all IPv4
+interfaces.
+
+Note:
+This evidence describes the observed listener and does not
+by itself establish that the service is secure or vulnerable.
