@@ -1,1 +1,54 @@
+# PROCESS INVESTIGATION
 
+Command:
+
+ps -p 1569 -o pid,ppid,user,%cpu,%mem,etime,args
+
+Relevant process information:
+
+PID:
+1569
+
+PPID:
+1
+
+USER:
+root
+
+CPU:
+0.0%
+
+MEMORY:
+0.3%
+
+ELAPSED TIME:
+Approximately 45 minutes at the time of investigation
+
+COMMAND:
+/usr/sbin/cupsd -l
+
+Executable:
+
+/usr/sbin/cupsd
+
+Parent process:
+
+PID 1 was identified as systemd.
+
+Interpretation:
+
+PID 1569 was the CUPS daemon process.
+
+The process was running as root and was associated with
+the system service infrastructure through PID 1.
+
+The executable path was identified as /usr/sbin/cupsd.
+
+Resource usage observed during the investigation was low.
+
+Security observation:
+
+Running as root is security-relevant, but root execution alone
+does not indicate malicious activity. The process must be
+evaluated in the context of its service, executable, package,
+configuration, and behavior.
