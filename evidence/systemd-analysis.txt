@@ -1,1 +1,55 @@
+# SYSTEMD AND PACKAGE INVESTIGATION
 
+1. CUPS SERVICE
+
+Command:
+
+sudo systemctl status cups
+
+Purpose:
+
+Check the current state and details of the CUPS system service.
+
+Relevant findings:
+
+* CUPS service was active and running.
+* Main PID was 1569.
+* The service was managed by the system service infrastructure.
+* The service executable was /usr/sbin/cupsd.
+
+2. PACKAGE ATTRIBUTION
+
+Command:
+
+sudo dpkg -S /usr/sbin/cupsd
+
+Result:
+
+cups-daemon: /usr/sbin/cupsd
+
+Interpretation:
+
+The command identified the installed Debian package that
+provided the /usr/sbin/cupsd executable.
+
+3. PACKAGE VERIFICATION
+
+Command:
+
+sudo dpkg -V cups-daemon
+
+Result:
+
+No output was produced.
+
+Interpretation:
+
+No discrepancies were reported by this package verification.
+
+Important limitation:
+
+dpkg -S identifies package ownership. It does not by itself
+prove that a package is legitimate.
+
+The verification result is also not an absolute guarantee
+that the system is uncompromised.
